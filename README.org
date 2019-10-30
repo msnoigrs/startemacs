@@ -1,0 +1,69 @@
+#+TITLE: Misc settings for emacs on windows
+#+AUTHOR: Masanao Igarashi
+#+EMAIL: syoux2@gmail.com
+#+DATE: 2019/10/17
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  ja
+#+OPTIONS: H:4 num:nil toc:nil ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS: tex:t todo:t pri:nil tags:t texht:nil
+#+OPTIONS: author:t creator:nil email:nil date:t
+
+* Windows上のemacs環境をより快適にするツール
+
+** 機能一覧
+
+本ツールをセットアップすると、以下のことが実現できます。
+
+- emacsを起動するショートカットアイコンをデスクトップに設置 (StartEmacs.exe)
+- ショートカットアイコンにファイルをドロップするとemacsで開く (StartEmacs.exe)
+- エクスプローラーの右クリックメニューにemacsから開くメニューを追加
+- emacsの実行環境にのみ有効にする環境変数(PATHなど)を設定する
+
+Windows上でemacsをコンパイルしてインストールする方法は、以下を参照してください。
+
+[[https://github.com/msnoigrs/emacs-on-windows-patches]]
+
+** セットアップ方法
+
+*** AutoHotkeyのインストール
+
+先にAutoHotkeyを以下からダウンロードしてインストールしてください。
+
+https://github.com/Lexikos/AutoHotkey_L/releases
+
+*** 本ツールのセットアップ
+
+次に、このリポジトリをcloneします。 =myemacs.bat= や =oiemacs.reg= にはemacsのパス情報が記載されています。利用環境に合わせて修正してください。合わせたら =setup.bat= を実行します。エクスプローラーから =setup.bat= をダブルクリックして実行できます。 =setup.bat= は以下の処理を行います。項番3以降は、実行するかどうかを問い合わせますので、実行する場合は =yes= を入力してください。
+
+1. emacs.icoをダウンロード (build.ps1)
+2. Ahk2Exeを使用して、StartEmacs.exeを生成 (build.ps1)
+3. デスクトップにショートカットを作成 (dtscut.ps1)
+4. 右クリックメニューにemacsから開くメニューを追加 (oiemacs.ps1)
+
+=myemacs.bat= ファイルの内容は、いつでも変更可能です。PATH環境変数の値など、必要に応じて変更してください。
+
+** アンインストール
+
+アンインストールする場合は、以下の手順で行います。
+
+1. =uoiemacs.bat= を実行(右クリックメニュー関係のレジストリ消去)
+2. デスクトップのショートカットを削除
+3. cloneしたフォルダを削除
+
+** IMEのON/OFFのホットキー設定
+
+私は、以下のホットキーを設定して使っています。
+
+- 右Shiftキーを単体で押すと、IMEをON
+- 左Shiftキーを単体で押すと、IMEをOFF
+- Ctrl+BackslashでIMEのON/OFFをトグル
+
+これらのことを実現するためのexeファイルをセットアップします。
+
+詳しくは https://github.com/msnoigrs/customhkwin を参照してください。
+
+** ライセンス
+
+- StartEmacs.ahkは、 https://blechmusik.hatenablog.jp/entry/2016/07/30/214310 および [[http://lukewarm.s101.xrea.com/myscripts/]] をベースに一部修正したものです。
+- StartEmacs.ahk以外のCopyrightはMasanao Igarashiで、ライセンスはMITです。
