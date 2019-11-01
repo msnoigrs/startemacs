@@ -57,7 +57,6 @@ https://github.com/Lexikos/AutoHotkey_L/releases
 
 - 右Shiftキーを単体で押すと、IMEをON
 - 左Shiftキーを単体で押すと、IMEをOFF
-- Ctrl+BackslashでIMEのON/OFFをトグル
 
 これらのことを実現するためのexeファイルをセットアップします。
 
