@@ -2,21 +2,21 @@ Windows Registry Editor Version 5.00
 
 [HKEY_CLASSES_ROOT\*\shell\open_emacs]
 @="emacs(&E)"
-"Icon"="C:\\emacs-26.3\\bin\\emacsclientw.exe"
+"Icon"="C:\\emacs\\bin\\emacsclientw.exe"
 
 [HKEY_CLASSES_ROOT\*\shell\open_emacs\command]
-@="C:\\emacs-26.3\\bin\\emacsclientw.exe -n -a C:\\emacs-26.3\\bin\\runemacs.exe \"%1\""
+@="C:\\emacs\\bin\\emacsclientw.exe -n -a C:\\emacs\\bin\\runemacs.exe \"%1\""
 
 [HKEY_CLASSES_ROOT\Folder\shell\open_emacs]
 @="emacs(&E)"
-"Icon"="C:\\emacs-26.3\\bin\\emacsclientw.exe"
+"Icon"="C:\\emacs\\bin\\emacsclientw.exe"
 
 [HKEY_CLASSES_ROOT\Folder\shell\open_emacs\command]
-@="C:\\emacs-26.3\\bin\\emacsclientw.exe -n -a C:\\emacs-26.3\\bin\\runemacs.exe \"%1\""
+@="C:\\emacs\\bin\\emacsclientw.exe -n -a C:\\emacs\\bin\\runemacs.exe \"%1\""
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\open_emacs]
 @="emacs(&E)"
-"Icon"="C:\\emacs-26.3\\bin\\emacsclientw.exe"
+"Icon"="C:\\emacs\\bin\\emacsclientw.exe"
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\open_emacs\command]
-@="C:\\emacs-26.3\\bin\\emacsclientw.exe -n -a C:\\emacs-26.3\\bin\\runemacs.exe \"%V/\""
+@="C:\\emacs\\bin\\emacsclientw.exe -n -a C:\\emacs\\bin\\runemacs.exe \"%V/\""
