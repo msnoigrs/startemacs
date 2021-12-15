@@ -1,5 +1,5 @@
 if (!(Test-Path -Path .\emacs.ico)) {
-    wget https://github.com/typester/emacs/raw/master/nt/icons/emacs.ico -OutFile emacs.ico
+    wget https://github.com/emacs-mirror/emacs/raw/master/nt/icons/emacs.ico -OutFile emacs.ico
 }
 
 $ahk2exe = "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe"
