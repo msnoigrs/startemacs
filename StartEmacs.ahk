@@ -23,12 +23,12 @@ read_ini_file_path(ini_file)
     {
         If not (FileExist(ini_file))
         {
-            Throw "ini_file のパスが見つかりません`n" . "設定値：" . ini_file
+            Throw "ini_file のパスが見つかりません`n設定値:" . %ini_file%
         }
         IniRead, path_emacs, %ini_file%, path, emacs
         If not (FileExist(path_emacs))
         {
-            Throw "emacs起動用プログラムのパスがみつかりません`n" . "設定値：" . path_emacs
+            Throw "emacs起動用プログラムのパスがみつかりません`n設定値:" . %path_emacs%
         }
     }
     Catch e
@@ -75,7 +75,7 @@ drag_and_drop_files_to_emacs(files)
             the_file := files[A_Index]
             if not (FileExist(the_file))
             {
-                Throw "編集対象のファイルが見つかりません`n" . "ファイル名：" . the_file
+                Throw "編集対象のファイルが見つかりません`nファイル名:" . %the_file%
             }
             PostMessage, 0x233, HDrop(the_file), 0,, ahk_class Emacs
             sleep, 100
