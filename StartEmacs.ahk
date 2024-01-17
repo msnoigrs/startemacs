@@ -1,91 +1,54 @@
-#NoEnv
-SendMode Input
-SetWorkingDir %A_ScriptDir%
-#SingleInstance force
-FileEncoding, CP65001
+#SingleInstance Force
+FileEncoding "UTF-8"
 
-DetectHiddenWindows,On
+DetectHiddenWindows true
 
-ini_file = StartEmacs.ini
+IniFile := "StartEmacs.ini"
 
-path_emacs := read_ini_file_path(ini_file)
-files := GetArgs()
-start_emacs(path_emacs)
+PathEmacs := ReadIniFile(IniFile)
 
-sleep, 600
-drag_and_drop_files_to_emacs(files)
+StartEmacs(PathEmacs)
+Sleep 600
 
-ExitApp
-
-read_ini_file_path(ini_file)
+for n, param in A_Args
 {
-    Try
+    if !(FileExist(param))
     {
-        If not (FileExist(ini_file))
-        {
-            Throw "ini_file のパスが見つかりません`n設定値:" . %ini_file%
-        }
-        IniRead, path_emacs, %ini_file%, path, emacs
-        If not (FileExist(path_emacs))
-        {
-            Throw "emacs起動用プログラムのパスがみつかりません`n設定値:" . %path_emacs%
-        }
-    }
-    Catch e
-    {
-        MsgBox, ファイル指定のエラー`n%e%`nプログラムを終了します
+        MsgBox Format("{1}が見つかりません。`nプログラムを終了します", param)
         ExitApp
     }
-    return path_emacs
+    PostMessage(0x233, HDrop(param), 0,,"ahk_class Emacs")
+    Sleep 100
 }
 
-GetArgs()
+ReadIniFile(inifile)
 {
-    global
-
-    _ArgCount=%0%
-    _Args := Object()
-
-    Loop, %_ArgCount%
+    if !(FileExist(inifile))
     {
-        _Args.push(%A_Index%)
+        MsgBox Format("{1}が見つかりません。`nプログラムを終了します", inifile)
+        ExitApp
     }
 
-    return _Args
+    try
+    {
+        PathEmacs := IniRead(inifile, "path", "emacs")
+    }
+    catch Error {
+          MsgBox Format("{1}ファイル中に以下のキーが見つかりません。`n`n[path]`nemacs=myemacs.bat`n`nプログラムを終了します", inifile)
+          ExitApp
+    }
+
+    return PathEmacs
 }
 
-start_emacs(path_emacs)
+StartEmacs(path)
 {
-    hwnd := WinExist("ahk_class Emacs")
-    if (hwnd)
+    if WinExist("ahk_class Emacs")
     {
-        WinActivate, ahk_id %hwnd%
+        WinActivate
         return
     }
-    Run, % path_emacs
-    return
-}
-
-drag_and_drop_files_to_emacs(files)
-{
-    Try
-    {
-        Loop, % files.length()
-        {
-            the_file := files[A_Index]
-            if not (FileExist(the_file))
-            {
-                Throw "編集対象のファイルが見つかりません`nファイル名:" . %the_file%
-            }
-            PostMessage, 0x233, HDrop(the_file), 0,, ahk_class Emacs
-            sleep, 100
-        }
-    }
-    Catch e
-    {
-        MsgBox, ファイル指定のエラー`n%e%`nプログラムを終了します
-        ExitApp
-    }
+    Run path
     return
 }
 
@@ -98,21 +61,21 @@ drag_and_drop_files_to_emacs(files)
 
 ; #Include DragDrop.ahk
 
-HDrop(fname,x=0,y=0)
+HDrop(fname, x:=0, y:=0)
 {
     characterSize := 2
     fns:=RegExReplace(fname,"\n$")
     fns:=RegExReplace(fns,"^\n")
     hDrop:=DllCall("GlobalAlloc","UInt",0x42,"UInt",20+(StrLen(fns)*characterSize)+characterSize*2)
     p:=DllCall("GlobalLock","UInt",hDrop)
-    NumPut(20, p+0) ;offset
-    NumPut(x, p+4) ;pt.x
-    NumPut(y, p+8) ;pt.y
-    NumPut(0, p+12) ;fNC
-    NumPut(1, p+16) ;fWide
+    NumPut "UInt", 20, p+0 ;offset
+    NumPut "UInt", x, p+4  ;pt.x
+    NumPut "UInt", y, p+8  ;pt.y
+    NumPut "UInt", 0, p+12 ;fNC
+    NumPut "UInt", 1, p+16 ;fWide
 
     p2:=p+20
-    Loop,Parse,fns,`n,`r
+    Loop parse, fns, "`n", "`r"
     {
         DllCall("RtlMoveMemory","UInt",p2,"Str",A_LoopField,"UInt",StrLen(A_LoopField)*characterSize)
         p2+=StrLen(A_LoopField)*characterSize + characterSize

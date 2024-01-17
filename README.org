@@ -1,7 +1,7 @@
 #+TITLE: Misc settings for emacs on windows
 #+AUTHOR: Masanao Igarashi
 #+EMAIL: syoux2@gmail.com
-#+DATE: 2019/10/17
+#+DATE: 2024/01/15
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  ja
@@ -64,5 +64,5 @@ https://github.com/Lexikos/AutoHotkey_L/releases
 
 ** ライセンス
 
-- StartEmacs.ahkは、 https://blechmusik.hatenablog.jp/entry/2016/07/30/214310 および [[http://lukewarm.s101.xrea.com/myscripts/]] をベースに一部修正したものです。
-- StartEmacs.ahk以外のCopyrightはMasanao Igarashiで、ライセンスはMITです。
+- StartEmacs.ahkは、 https://blechmusik.hatenablog.jp/entry/2016/07/30/214310 および [[http://lukewarm.s101.xrea.com/myscripts/]] をベースに一部修正した後、V2に対応したものです。
+- CopyrightはMasanao Igarashiで、ライセンスはMITです。
